@@ -5,7 +5,7 @@ import { Injectable, Scope } from '@nestjs/common';
 /**
  * Provider for managing user information in the context of JWT authentication.
  */
-@Injectable({ scope: Scope.REQUEST })
+@Injectable({ scope: Scope.DEFAULT })
 export class UserProvider {
   user: any; // Store the user information
 

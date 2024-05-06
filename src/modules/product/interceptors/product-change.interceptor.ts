@@ -39,11 +39,7 @@ export class ProductChangeInterceptor implements NestInterceptor {
       const req = context.switchToHttp().getRequest<Request>();
 
       // Extract user information from the request
-      const user = this.userProvider.getUser(); // Assuming user information is stored in the request
-
       // Log the user information
-      console.log('User:', user);
-
       // Start transaction
       const queryRunner = this.dataSource.createQueryRunner();
       await queryRunner.connect();
