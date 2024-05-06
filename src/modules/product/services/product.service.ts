@@ -1,4 +1,5 @@
 // product.service.ts
+
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -14,6 +15,9 @@ import {
   paginate,
 } from 'nestjs-paginate';
 
+/**
+ * Service responsible for managing product-related operations.
+ */
 @Injectable()
 export class ProductService {
   constructor(
@@ -22,9 +26,11 @@ export class ProductService {
     private readonly productChangeService: ProductChangeService, // Inject ProductChangeService
   ) {}
 
-  // async findAll(): Promise<Product[]> {
-  //   return await this.productRepository.find();
-  // }
+  /**
+   * Retrieves paginated list of products.
+   * @param query Paginate query.
+   * @returns Paginated list of products.
+   */
   async findAll(query: PaginateQuery): Promise<Paginated<Product>> {
     return paginate(query, this.productRepository, {
       sortableColumns: ['id', 'name', 'price'],
@@ -37,16 +43,32 @@ export class ProductService {
     });
   }
 
+  /**
+   * Finds a product by its ID.
+   * @param id Product ID.
+   * @returns Product entity.
+   */
   async findOne(id: number): Promise<Product> {
     return await this.productRepository.findOne({ where: { id } });
   }
 
+  /**
+   * Creates a new product.
+   * @param createProductDto Product data.
+   * @returns Created product entity.
+   */
   async create(createProductDto: CreateProductDto): Promise<Product> {
     const { name, description, price } = createProductDto;
     const product = this.productRepository.create({ name, description, price });
     return await this.productRepository.save(product);
   }
 
+  /**
+   * Updates an existing product.
+   * @param id Product ID.
+   * @param updateProductDto Updated product data.
+   * @returns Updated product entity.
+   */
   async update(
     id: number,
     updateProductDto: UpdateProductDto,

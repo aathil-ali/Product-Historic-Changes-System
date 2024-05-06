@@ -1,4 +1,3 @@
-// src/modules/product/product.module.ts
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductService } from './services/product.service';
@@ -9,10 +8,13 @@ import { ProductChange } from './entities/product-change.entity';
 import { User } from '../user/entities/user.entity';
 import { ProductChangeService } from './services/product-change.service';
 import { JwtMiddleware } from '../../middlewares/jwt.middleware'; // Import the JWT middleware
-//import { AuthMiddleware } from '../../middlewares/auth.middleware'; // Import the AuthMiddleware
 import { UserProvider } from '../user/providers/user.provider';
 import { ProductChangeInterceptor } from './interceptors/product-change.interceptor';
 import { ProductChangeFacade } from './facades/product-change.facade';
+
+/**
+ * Module responsible for managing product-related features.
+ */
 @Module({
   imports: [TypeOrmModule.forFeature([Product, ProductChange, User])],
   controllers: [ProductController, ProductChangeController],
@@ -26,6 +28,10 @@ import { ProductChangeFacade } from './facades/product-change.facade';
   ],
 })
 export class ProductModule {
+  /**
+   * Configures middleware for the module.
+   * @param consumer Middleware consumer.
+   */
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(JwtMiddleware).forRoutes('products');
   }

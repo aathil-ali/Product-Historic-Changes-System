@@ -1,4 +1,5 @@
 // product-change.service.ts
+
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -17,14 +18,22 @@ import {
   FilterSuffix,
 } from 'nestjs-paginate';
 
+/**
+ * Service responsible for managing product change operations.
+ */
 @Injectable()
 export class ProductChangeService {
-  UserProvider: UserProvider;
   constructor(
     @InjectRepository(ProductChange)
     private readonly productChangeRepository: Repository<ProductChange>,
     private readonly userProvider: UserProvider, // Inject UserProvider
   ) {}
+
+  /**
+   * Creates product change records for the given product and changes.
+   * @param product Product entity.
+   * @param changes Partial<Product> object representing changes.
+   */
   async createChanges(
     product: Product,
     changes: Partial<Product>,
@@ -43,6 +52,13 @@ export class ProductChangeService {
 
     await this.productChangeRepository.save(changeEntities);
   }
+
+  /**
+   * Retrieves paginated product change history for a specific product.
+   * @param productId Product ID.
+   * @param query Paginate query.
+   * @returns Paginated list of product changes.
+   */
   async findByProductId(
     productId: number,
     query: PaginateQuery,
@@ -77,6 +93,13 @@ export class ProductChangeService {
 
     return result;
   }
+
+  /**
+   * Finds product changes for a specific product and field.
+   * @param productId Product ID.
+   * @param fieldName Field name.
+   * @returns List of product changes.
+   */
   async findByProductIdAndField(
     productId: number,
     fieldName: string,

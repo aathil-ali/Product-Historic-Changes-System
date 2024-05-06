@@ -1,22 +1,22 @@
-// product-change.controller.ts
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Paginate, PaginateQuery, Paginated } from 'nestjs-paginate';
 import { ProductChange } from '../entities/product-change.entity';
 import { ProductChangeFilterDto } from '../dto/product-change-filter.dto';
 import { ProductChangeFacade } from '../facades/product-change.facade';
 
+/**
+ * Controller responsible for handling product change related endpoints.
+ */
 @Controller('products/:productId/history')
 export class ProductChangeController {
   constructor(private readonly productChangeFacade: ProductChangeFacade) {}
 
-  @ApiOperation({
-    summary: 'Retrieve historical changes for a specific product',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Returns the historical changes for the specified product',
-  })
+  /**
+   * Retrieve historical changes for a specific product.
+   * @param query PaginateQuery object for pagination options.
+   * @param productId Product ID.
+   * @returns Promise resolving to a Paginated array of ProductChange entities.
+   */
   @Get()
   async findByProductId(
     @Paginate() query: PaginateQuery,
@@ -25,14 +25,12 @@ export class ProductChangeController {
     return await this.productChangeFacade.findByProductId(productId, query);
   }
 
-  @ApiOperation({
-    summary: 'Retrieve historical changes for a specific product and field',
-  })
-  @ApiResponse({
-    status: 200,
-    description:
-      'Returns the historical changes for the specified product and field',
-  })
+  /**
+   * Retrieve historical changes for a specific product and field.
+   * @param productId Product ID.
+   * @param filterDto ProductChangeFilterDto object containing filter options.
+   * @returns Promise resolving to an array of ProductChange entities.
+   */
   @Get('/filter')
   async findByProductIdAndField(
     @Param('productId') productId: number,

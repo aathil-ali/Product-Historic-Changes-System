@@ -2,17 +2,25 @@
 
 import { Injectable, Scope } from '@nestjs/common';
 
+/**
+ * Provider for managing user information in the context of JWT authentication.
+ */
 @Injectable({ scope: Scope.REQUEST })
 export class UserProvider {
-  static getUser() {
-    throw new Error('Method not implemented.');
-  }
   user: any; // Store the user information
 
+  /**
+   * Sets the user information.
+   * @param user The user object to be stored.
+   */
   setUser(user: any) {
     this.user = user;
   }
 
+  /**
+   * Retrieves the stored user information.
+   * @returns The user object.
+   */
   getUser() {
     return this.user;
   }
