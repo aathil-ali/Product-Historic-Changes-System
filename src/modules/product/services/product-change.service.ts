@@ -71,6 +71,10 @@ export class ProductChangeService {
       config,
     );
 
+    if (!result.data || result.data.length === 0) {
+      throw new NotFoundException('Product change history not found');
+    }
+
     return result;
   }
   async findByProductIdAndField(
