@@ -1,103 +1,145 @@
-Sure, here's a detailed README.md file for your Nest.js application:
+---
 
-```
-# My Nest.js Application
+# Product Historic Changes System
 
-## Description
+## Overview
 
-This is a Nest.js application for managing products. It includes user authentication, product management, and product change history functionalities.
+The Product Historic Changes System is a full-stack application developed using NestJS for the backend and connecting to a database of your choice. The main functionality of this system is to track changes made to fields in a collection and display them visually in the frontend. It implements a historical changes system that ensures all operations related to product changes are executed within a transaction, and it uniformly handles responses and errors across the application.
+
+## Features
+
+- **Historical Changes Tracking**: Tracks changes made to fields in a collection and stores them efficiently and securely in the database.
+- **Transaction Management**: Uses interceptors to manage transactions for product change operations, ensuring all operations are executed within a transaction.
+- **Uniform Response Handling**: Utilizes interceptors to handle responses and errors uniformly, providing consistent feedback to the user.
+- **Swagger Documentation**: Automatically generates API documentation using Swagger for easy reference and testing of endpoints.
+- **TypeScript**: Written entirely in TypeScript, ensuring type safety and improved development experience.
+- **Design Patterns**: Implements various design patterns, including interceptors, facades, and dependency injection, showcasing understanding of software architecture principles.
+- **SOLID Principles**: Adheres to SOLID principles in code design and implementation for improved maintainability and scalability.
+---
 
 ## Installation
 
-### Prerequisites
-
-- Node.js (version >= 12.0.0)
-- npm (version >= 6.0.0)
-- MySQL database server
-
-### Steps
-
-1. Clone the repository:
+1. **Clone the Repository**:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/your-username/product-historic-changes-system.git
    ```
 
-2. Navigate to the project directory:
+2. **Install Dependencies**:
 
    ```bash
-   cd my-nest-app
-   ```
-
-3. Install dependencies:
-
-   ```bash
+   cd product-historic-changes-system
    npm install
    ```
 
-4. Create a `.env` file in the root directory of the project with the following environment variables:
+3. **Set Environment Variables**:
+
+   Create a `.env` file in the root directory and configure the following environment variables:
 
    ```plaintext
-   DB_HOST=localhost
-   DB_PORT=3306
-   DB_USERNAME=root
-   DB_PASSWORD=password
-   DB_DATABASE=product
-   DATABASE_TYPE=mysql
-   JWT_KEY="eGBOG71bm8jzjsYAszOOPzuIfs"
-   DEBUG=typeorm
+   # Server Configuration
+   PORT=3000
+
+   # Database Configuration
+   DATABASE_HOST=your-database-host
+   DATABASE_PORT=your-database-port
+   DATABASE_USER=your-database-user
+   DATABASE_PASSWORD=your-database-password
+   DATABASE_NAME=your-database-name
+
+   # JWT Configuration
+   JWT_SECRET=your-jwt-secret
    ```
 
-   Adjust the values according to your database configuration and JWT secret key.
+   Replace `your-database-host`, `your-database-port`, `your-database-user`, `your-database-password`, and `your-database-name` with the appropriate values for your database configuration. Additionally, replace `your-jwt-secret` with your preferred JWT secret key.
 
-5. Start the application:
+4. **Start the Application**:
 
    ```bash
    npm start
    ```
 
-   Alternatively, you can run the application in development mode with hot-reload:
+5. **Access the Application**:
 
-   ```bash
-   npm run start:dev
-   ```
+   Open your web browser and navigate to `http://localhost:3000` to access the application.
 
-   The application will be running at `http://localhost:3000`.
 
-## Usage
+## API Documentation
 
-### User Authentication
+### Endpoints
 
-- Register a new user: `POST /auth/register`
-- Login with a registered user: `POST /auth/login`
+1. **GET /products**
+   - Retrieves a list of all products.
+   - Parameters: None
+   - Returns: Array of product objects.
 
-### Product Management
+2. **GET /products/:id**
+   - Retrieves a specific product by its ID.
+   - Parameters: Product ID in the URL path.
+   - Returns: Details of the specified product.
 
-- Get all products: `GET /products`
-- Get a product by ID: `GET /products/:id`
-- Create a new product: `POST /products`
-- Update a product by ID: `PUT /products/:id`
+3. **POST /products**
+   - Creates a new product.
+   - Parameters: Product data in the request body.
+   - Returns: Details of the newly created product.
 
-### Product Change History
+4. **PUT /products/:id**
+   - Updates an existing product.
+   - Parameters: Product ID in the URL path, updated product data in the request body.
+   - Returns: Details of the updated product.
 
-- Get historical changes for a specific product: `GET /products/:productId/history`
-- Get historical changes for a specific product and field: `GET /products/:productId/history/filter`
+5. **GET /products/:productId/history**
+   - Retrieves the historical changes for a specific product.
+   - Parameters: Product ID in the URL path.
+   - Returns: Array of historical change records for the specified product.
 
-## Testing
+6. **GET /products/:productId/history/filter**
+   - Retrieves historical changes for a specific product and field.
+   - Parameters: Product ID in the URL path, field name in the query parameters.
+   - Returns: Array of historical change records for the specified product and field.
 
-Unit tests and integration tests are available in the `test` directory. You can run the tests using the following command:
+### Authentication
 
-```bash
-npm test
+- The API utilizes JWT (JSON Web Tokens) for authentication.
+- Certain endpoints may require authentication to access, while others may be publicly accessible.
+- Users can obtain a JWT token by logging in or registering with the application.
+
+---
+
+This overview provides a brief summary of the available endpoints, error handling approach, authentication mechanism, and the format of requests and responses in your API.
+        
+
+## Folder Structure
+
+```
+product-historic-changes-system/
+├── src/
+│   ├── controllers/
+│   ├── dto/
+│   ├── entities/
+│   ├── facades/
+│   ├── interceptors/
+│   ├── middlewares/
+│   ├── providers/
+│   ├── services/
+│   ├── app.module.ts
+│   └── main.ts
+├── test/
+├── logs/
+├── .env
+├── .gitignore
+├── package.json
+└── README.md
 ```
 
 ## Contributing
 
-Contributions are welcome! Feel free to submit bug reports, feature requests, or pull requests.
+Contributions are welcome! Feel free to fork the repository, make changes, and submit pull requests for review.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
+This project is licensed under the [MIT License](LICENSE).
 
-Replace `<repository-url>` with the URL of your Git repository. Adjust the content and instructions according to your application's specifics.
+---
+
+Feel free to customize the README.md file further based on your specific requirements and preferences.
