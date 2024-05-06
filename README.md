@@ -112,24 +112,59 @@ This overview provides a brief summary of the available endpoints, error handlin
 ## Folder Structure
 
 ```
-product-historic-changes-system/
+project-historical-changes/
 ├── src/
-│   ├── controllers/
-│   ├── dto/
-│   ├── entities/
-│   ├── facades/
-│   ├── interceptors/
 │   ├── middlewares/
-│   ├── providers/
-│   ├── services/
+│   │   ├── jwt.middleware.ts
+│   │   └── jwt-payload.interface.ts
+│   ├── modules/
+│   │   ├── product/
+│   │   │   ├── controllers/
+│   │   │   │   ├── product-change.controller.ts
+│   │   │   │   └── product.controller.ts
+│   │   │   ├── dto/
+│   │   │   │   ├── create-product.dto.ts
+│   │   │   │   ├── get-product.dto.ts
+│   │   │   │   ├── list-product.dto.ts
+│   │   │   │   ├── product-change.dto.ts
+│   │   │   │   ├── product-change-filter.dto.ts
+│   │   │   │   └── product-change-record.dto.ts
+│   │   │   ├── entities/
+│   │   │   │   ├── product-change.entity.ts
+│   │   │   │   └── product.entity.ts
+│   │   │   ├── facades/
+│   │   │   │   ├── product-change-facade.interface.ts
+│   │   │   │   └── product-change.facade.ts
+│   │   │   ├── interceptors/
+│   │   │   │   └── product-change.interceptor.ts
+│   │   │   └── services/
+│   │   │       └── product.service.ts
+│   │   └── user/
+│   │       ├── controllers/
+│   │       │   └── user.controller.ts
+│   │       ├── dto/
+│   │       │   ├── create-user.dto.ts
+│   │       │   └── login.dto.ts
+│   │       ├── entities/
+│   │       │   └── user.entity.ts
+│   │       ├── providers/
+│   │       │   └── user.provider.ts
+│   │       └── services/
+│   │           └── user.service.ts
+│   ├── response/
+│   │   └── response.interceptor.ts
+│   ├── app.controller.spec.ts
+│   ├── app.controller.ts
 │   ├── app.module.ts
+│   ├── app.service.ts
+│   ├── data-source.ts
 │   └── main.ts
-├── test/
 ├── logs/
 ├── .env
 ├── .gitignore
 ├── package.json
 └── README.md
+
 ```
 
 ## Contributing
