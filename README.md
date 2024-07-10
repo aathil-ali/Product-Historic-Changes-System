@@ -17,6 +17,10 @@ The Product Historic Changes System is a full-stack application developed using 
 - **SOLID Principles**: Adheres to SOLID principles in code design and implementation for improved maintainability and scalability.
 ---
 
+## Postman Collection
+
+https://speeding-spaceship-170508.postman.co/workspace/test~fcd8bcab-53f5-4184-a7ef-5a05ac22a6ba/collection/17572264-dfc07ad4-6cea-4b6b-97c7-bbdc49d891ad?action=share&creator=17572264
+
 ## Installation
 
 1. **Clone the Repository**:
